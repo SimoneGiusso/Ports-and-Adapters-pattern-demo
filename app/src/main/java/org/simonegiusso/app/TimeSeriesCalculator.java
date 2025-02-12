@@ -6,15 +6,15 @@ import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.simonegiusso.app.domain.Price;
-import org.simonegiusso.app.ports.driven.ForGettingAssetInfo;
+import org.simonegiusso.app.ports.driven.ForGettingTimeseries;
 import org.simonegiusso.app.ports.driving.ForGettingMaxPrice;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class TimeSeriesCalculator implements ForGettingMaxPrice {
 
-    private final ForGettingAssetInfo assetInfoProvider;
+    private final ForGettingTimeseries assetInfoProvider;
 
     @Override
     public Optional<Price> getMaxPrice(String isin) {

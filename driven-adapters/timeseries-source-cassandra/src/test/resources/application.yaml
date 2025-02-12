@@ -1,0 +1,7 @@
+ports:
+  driven:
+    timeseries:
+      source: cassandra
+      cassandra:
+        local-datacenter: datacenter1
+        keyspace-name: my_keyspace

@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: ../configurator
+      dockerfile: Dockerfile
+    container_name: ports-and-adapters-demo
+    ports:
+      - "8080:8080"
+    environment:
+      - PORTS_DRIVEN_TIMESERIES_SOURCE=cassandra
+      - PORTS_DRIVEN_TIMESERIES_CASSANDRA_CONTACT_POINTS=cassandra
+      - PORTS_DRIVEN_TIMESERIES_POSTGRES_URL=jdbc:postgresql://postgres:5432/postgres
+    depends_on:
+      - postgres
+      - cassandra
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: postgres
+    volumes:
+      - ./postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
+  cassandra:
+    image: cassandra:4.0
+    container_name: cassandra
+    restart: always
+  # When starting cassandra container, we need to wait that it creates the database. During this time cassandra will not accept connections.
+  # To avoid overriding the entry point, we create another container that will wait for cassandra to be ready and then load the keyspace.
+  cassandra-load-keyspace:
+    container_name: cassandra-load-keyspace
+    image: cassandra:4.0
+    depends_on:
+      - cassandra
+    volumes:
+      - ./cassandra-init.sql:/init.sql
+    command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f init.sql"

@@ -3,6 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.simonegiusso</groupId>
         <artifactId>ports-and-adapters-pattern-demo</artifactId>
@@ -10,23 +11,19 @@
     </parent>
 
     <artifactId>driving-adapters</artifactId>
+    <packaging>pom</packaging>
 
-    <description>Module to contain the driving adapters</description>
+    <description>Module containing the driving adapters</description>
+
+    <modules>
+        <module>asset-info-rest</module>
+    </modules>
 
     <dependencies>
         <dependency>
             <groupId>org.simonegiusso</groupId>
             <artifactId>app</artifactId>
             <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -39,6 +36,36 @@
             <artifactId>jakarta.inject-api</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.simonegiusso</groupId>
+            <artifactId>test-utils</artifactId>
+            <version>${revision}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-javaagent:${org.mockito:mockito-core:jar}</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

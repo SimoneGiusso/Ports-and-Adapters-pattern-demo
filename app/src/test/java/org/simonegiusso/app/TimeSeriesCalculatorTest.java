@@ -2,6 +2,7 @@ package org.simonegiusso.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.simonegiusso.utils.test.constants.Constants.APPLE_ISIN;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -12,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.simonegiusso.app.domain.Price;
-import org.simonegiusso.app.ports.driven.ForGettingAssetInfo;
+import org.simonegiusso.app.ports.driven.ForGettingTimeseries;
 
 @ExtendWith(MockitoExtension.class)
 class TimeSeriesCalculatorTest {
@@ -25,19 +26,18 @@ class TimeSeriesCalculatorTest {
         LocalDate.of(2021, 1, 4), 145.0,
         LocalDate.of(2021, 1, 5), 156.0
     ));
-    private static final String APPLE_ISIN = "US0378331005";
 
     @Mock
-    private ForGettingAssetInfo assetInfoProvider;
+    private ForGettingTimeseries assetInfoProvider;
 
     @InjectMocks
     private TimeSeriesCalculator timeSeriesCalculator;
 
     @Test
-    void compute_the_max_price_from_a_timeseries() {
+    void compute_timeseries_max_price() {
         when(assetInfoProvider.getSortedDescTimeSeries(APPLE_ISIN)).thenReturn(TIMESERIES);
 
-        var maxPrice = timeSeriesCalculator.getMaxPrice(APPLE_ISIN).orElseThrow();
+        Price maxPrice = timeSeriesCalculator.getMaxPrice(APPLE_ISIN).orElseThrow();
 
         assertEquals(MAX_PRICE, maxPrice);
     }
