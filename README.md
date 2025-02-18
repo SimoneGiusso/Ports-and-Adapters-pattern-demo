@@ -70,8 +70,8 @@ The project is divided into submodules:
   is stored (e.g., connection details to the database).
 - other secondary common utilities modules.
 
-> ⚠️ In a situation where you have more than one port using the same technology, it might be convenient to have one module per
-> technology instead of per adapter in the driven and driving modules. But honestly I didn't think much about it.
+> ⚠️ Driven and driving modules can contains folder/packages rather than submodules. However you start to have less clear separation
+> between adapters (e.g. pom start to contain more dependencies). But it could be an possible alternative.
 
 ### Motivations behind this structure
 
@@ -113,7 +113,7 @@ This is just a configuration proposal. Configuration may change case by case.
 - **Testability**: The separation of concerns makes it easier to write unit tests for the core business logic. Integration tests
   will be in the adapter modules (and startup tests in the `configurator`).
 - **Maintainability**: The clear separation between the core logic and external dependencies makes the codebase easier to maintain
-  and understand.
+  and understand. Moreover, different teams can develop section of codes independently
 
 There are some disadvantages as well:
 
