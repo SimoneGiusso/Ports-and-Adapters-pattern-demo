@@ -2,9 +2,11 @@
 
 This is an attempt to apply the **ports and adapters pattern** (also known as Hexagonal Architecture) with Spring, Java, and
 Maven using as reference the
-book [Hexagonal Architecture explained](https://store7710079.company.site/Hexagonal-Architecture-Explained-p655931616) by Alistair
-Cockburn (the inventor of this pattern) and Juan Manuel Garrido de Paz (reading suggested). This demo project has also been
+book [Hexagonal Architecture explained]([https://store7710079.company.site/Hexagonal-Architecture-Explained-p655931616](https://alistaircockburn.company.site/Epub-Hexagonal-Architecture-Explained-Updated-1st-ed-p751233517)) by [Alistair
+Cockburn](https://en.wikipedia.org/wiki/Alistair_Cockburn) (the inventor of this pattern - one of the initiators of the agile movement in software development) and Juan Manuel Garrido de Paz (reading suggested). This demo project has also been
 inspired by Juan's [project](https://github.com/jmgarridopaz/bluezone).
+
+P.S. I've been personally mentioned in the book as I provided great feedback in the preview edition (see [pag 193](https://alistaircockburn.com/hexarch%20v1.1b%20DIFFS%2020250420-1012%20paper+epub.docx.pdf)).
 
 # Instructions to run it
 
@@ -54,7 +56,7 @@ The app has very simple logic, just to show the application of the pattern. It e
 The app, given an asset identifier (ISIN), reads the timeseries from a source (available sources for this project are Cassandra
 and Postgres) via adapters, computes the max price (logic), and returns it.
 
-![Hexagonal Architecture Demo Project.svg](doc-images/Hexagonal%20Architecture%20Demo%20Project.svg)
+![Hexagonal Architecture Demo Project.svg](bookdoc-images/Hexagonal%20Architecture%20Demo%20Project.svg)
 *The timeseries source can be changed from Postgres to Cassandra without impacting any code present in the app (hexagon)*
 
 ## Structure
