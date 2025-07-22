@@ -56,7 +56,7 @@ The app has very simple logic, just to show the application of the pattern. It e
 The app, given an asset identifier (ISIN), reads the timeseries from a source (available sources for this project are Cassandra
 and Postgres) via adapters, computes the max price (logic), and returns it.
 
-![Hexagonal Architecture Demo Project.svg](bookdoc-images/Hexagonal%20Architecture%20Demo%20Project.svg)
+![Hexagonal Architecture Demo Project.svg](doc-images/Hexagonal%20Architecture%20Demo%20Project.svg)
 *The timeseries source can be changed from Postgres to Cassandra without impacting any code present in the app (hexagon)*
 
 ## Structure
